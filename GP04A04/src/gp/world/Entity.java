@@ -23,6 +23,8 @@ public abstract class Entity implements Renderable, Updateable {
 	private GL2 gl;
 	private GLU glu;
 	private GLUT glut;
+	
+	private Margins margins = null;
 
 	public Entity() {
 		this(0f, 0f, 0f, 0f);
@@ -37,9 +39,19 @@ public abstract class Entity implements Renderable, Updateable {
 		this.movement = null;
 	}
 
-	public Entity(float x, float y, float z) {
+
+	public Entity( float x, float y, float z) {
 		this(x, y, z, 0f);
 	}
+	
+	public Margins getMargins() {
+		return margins;
+	}
+
+	public void setMargins(Margins margins) {
+		this.margins = margins;
+	}
+
 
 	@Override
 	public void render(GL2 gl, GLU glu, GLUT glut) {
@@ -56,7 +68,6 @@ public abstract class Entity implements Renderable, Updateable {
 
 		_render(gl, glu, glut);
 
-		// gl.glTranslatef(-x, -y, -z);
 	}
 
 	@Override
@@ -95,6 +106,13 @@ public abstract class Entity implements Renderable, Updateable {
 
 	public void moveTo(float gx, float gy, float gz) {
 		if (movement == null) {
+			
+			if(margins != null) {
+				if(gx < margins.getMarginX1() || gx > margins.getMarginX2() || gy < margins.getMarginY1() || gy > margins.getMarginY2()) {
+					return;
+				}
+			}
+			
 			final float xm = (gx+x)/2;
 			final float ym = (gy+y)/2;
 			
@@ -105,14 +123,6 @@ public abstract class Entity implements Renderable, Updateable {
 
 	public void moveRel(float dx, float dy, float dz) {
 		moveTo(x + dx, y + dy, z + dz);
-	}
-	
-	public float[] getCurPos() {
-		if (movement != null) {
-			return movement.getCurrentPos();
-		} else {
-			return new float[] {x,y,z};
-		}
 	}
 
 	public float getAlpha() {

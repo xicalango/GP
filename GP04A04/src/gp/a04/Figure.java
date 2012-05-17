@@ -1,6 +1,7 @@
 package gp.a04;
 
 import gp.world.Entity;
+import gp.world.Margins;
 
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
@@ -31,6 +32,7 @@ public class Figure extends Entity {
 		gl.glTranslatef(0f, 0f, -1.35f);
 		
 	}
+
 
 
 }

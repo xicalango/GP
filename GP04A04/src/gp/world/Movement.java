@@ -75,8 +75,7 @@ public class Movement implements Updateable{
 			if( t > 1 ) {
 				t = 1;
 			}
-		}
-			
+		}	
 	}
 	
 	public boolean isFinished() {

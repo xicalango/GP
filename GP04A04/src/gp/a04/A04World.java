@@ -34,9 +34,11 @@ public class A04World extends World {
 
 	public A04World() {
 		super();
-		
+
+		setMargins(-4, -4, 4, 4);
 		
 		figure = new Figure();
+		figure.setMargins(this);
 		figure.setX(0.5f);
 		figure.setY(0.5f);
 		figure.setZ(0f);
@@ -84,17 +86,7 @@ public class A04World extends World {
 
 		if( pos == CamPos.FIGURE) {
 			
-			switch(e.getKeyCode()) {
-			case KeyEvent.VK_1:
-				figure.setAlpha(figure.getAlpha()  - (float)Math.PI/2);
-				break;
-			case KeyEvent.VK_2:
-				figure.setAlpha(figure.getAlpha() + (float)Math.PI);
-				break;
-			case KeyEvent.VK_3:
-				figure.setAlpha(figure.getAlpha() + (float)Math.PI*3/2);
-				break;
-				
+			switch(e.getKeyCode()) {				
 			case KeyEvent.VK_A:
 				figure.setAlpha(figure.getAlpha()  + (float)Math.PI/2);
 				break;
@@ -112,7 +104,7 @@ public class A04World extends World {
 				break;
 				
 			case KeyEvent.VK_LEFT:
-				figure.moveRel( -(float)Math.cos(figure.getAlpha() + ((float)Math.PI/2)), (float)Math.sin(figure.getAlpha() + ((float)Math.PI/2)), 0); 
+				figure.moveRel( (float)Math.cos(figure.getAlpha() + ((float)Math.PI/2)), (float)Math.sin(figure.getAlpha() + ((float)Math.PI/2)), 0); 
 				break;
 
 			case KeyEvent.VK_UP:
@@ -138,7 +130,7 @@ public class A04World extends World {
 				figure.moveRel(0, 1, 0);
 				break;
 				
-			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_DOWN:				
 				figure.moveRel(0, -1, 0);
 				break;
 

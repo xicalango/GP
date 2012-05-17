@@ -14,11 +14,48 @@ import javax.media.opengl.glu.GLU;
 
 import com.jogamp.opengl.util.gl2.GLUT;
 
-public class World implements Renderable, Updateable, Iterable<Entity>, KeyListener {
+public class World implements Renderable, Updateable, Iterable<Entity>, KeyListener, Margins {
 
 	private Camera camera;
-	private List<Entity> toRender = new ArrayList<Entity>();
+	private List<Entity> entities = new ArrayList<Entity>();
 	
+	private float marginX1 = -1f;
+	private float marginY1 = -1f;
+	private float marginX2 = 1f;
+	private float marginY2 = 1f;
+	
+	public float getMarginX1() {
+		return marginX1;
+	}
+
+	public void setMarginX1(float marginX1) {
+		this.marginX1 = marginX1;
+	}
+
+	public float getMarginY1() {
+		return marginY1;
+	}
+
+	public void setMarginY1(float marginY1) {
+		this.marginY1 = marginY1;
+	}
+
+	public float getMarginX2() {
+		return marginX2;
+	}
+
+	public void setMarginX2(float marginX2) {
+		this.marginX2 = marginX2;
+	}
+
+	public float getMarginY2() {
+		return marginY2;
+	}
+
+	public void setMarginY2(float marginY2) {
+		this.marginY2 = marginY2;
+	}
+
 	public World() {
 		this(new Camera());
 	}
@@ -36,15 +73,15 @@ public class World implements Renderable, Updateable, Iterable<Entity>, KeyListe
 	}
 	
 	public boolean add(Entity arg0) {
-		return toRender.add(arg0);
+		return entities.add(arg0);
 	}
 
 	public Entity get(int arg0) {
-		return toRender.get(arg0);
+		return entities.get(arg0);
 	}
 
 	public boolean remove(Object arg0) {
-		return toRender.remove(arg0);
+		return entities.remove(arg0);
 	}
 
 	@Override
@@ -76,7 +113,7 @@ public class World implements Renderable, Updateable, Iterable<Entity>, KeyListe
 	
 	@Override
 	public Iterator<Entity> iterator() {
-		return toRender.iterator();
+		return entities.iterator();
 	}
 
 	public void init() {
@@ -92,5 +129,13 @@ public class World implements Renderable, Updateable, Iterable<Entity>, KeyListe
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
+
+	@Override
+	public void setMargins(float x1, float y1, float x2, float y2) {
+		this.marginX1 = x1;
+		this.marginY1 = y1;
+		this.marginX2 = x2;
+		this.marginY2 = y2;
+	}
 	
 }
