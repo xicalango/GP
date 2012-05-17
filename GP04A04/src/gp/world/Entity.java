@@ -108,8 +108,11 @@ public abstract class Entity implements Renderable, Updateable {
 		if (movement == null) {
 			
 			if(margins != null) {
-				if(gx < margins.getMarginX1() || gx > margins.getMarginX2() || gy < margins.getMarginY1() || gy > margins.getMarginY2()) {
-					return;
+				if(gx < margins.getMarginX1() || gx > margins.getMarginX2()) {
+					gx = x;
+				}
+				if(gy < margins.getMarginY1() || gy > margins.getMarginY2()) {
+					gy = y;
 				}
 			}
 			

@@ -87,30 +87,30 @@ public class A04World extends World {
 		if( pos == CamPos.FIGURE) {
 			
 			switch(e.getKeyCode()) {				
-			case KeyEvent.VK_A:
+			case KeyEvent.VK_LEFT:
 				figure.setAlpha(figure.getAlpha()  + (float)Math.PI/2);
 				break;
 				
-			case KeyEvent.VK_D:
+			case KeyEvent.VK_RIGHT:
 				figure.setAlpha(figure.getAlpha()  - (float)Math.PI/2);
 				break;
 				
-			case KeyEvent.VK_S:
+			case KeyEvent.VK_DOWN:
 				figure.setAlpha(figure.getAlpha()  + (float)Math.PI);
 				break;
 
-			case KeyEvent.VK_RIGHT:
+			case KeyEvent.VK_D:
 				figure.moveRel( (float)Math.cos(figure.getAlpha() - ((float)Math.PI/2)), (float)Math.sin(figure.getAlpha() - ((float)Math.PI/2)), 0); 
 				break;
 				
-			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_A:
 				figure.moveRel( (float)Math.cos(figure.getAlpha() + ((float)Math.PI/2)), (float)Math.sin(figure.getAlpha() + ((float)Math.PI/2)), 0); 
 				break;
 
-			case KeyEvent.VK_UP:
+			case KeyEvent.VK_W:
 				figure.moveRel( (float)Math.cos(figure.getAlpha()), (float)Math.sin(figure.getAlpha()), 0); 
 				break;
-			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_S:
 				figure.moveRel( -(float)Math.cos(figure.getAlpha()), -(float)Math.sin(figure.getAlpha()), 0); 
 				break;
 			}
