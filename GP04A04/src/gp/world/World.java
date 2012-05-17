@@ -1,6 +1,7 @@
 package gp.world;
 
 
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,7 +12,7 @@ import javax.media.opengl.glu.GLU;
 
 import com.jogamp.opengl.util.gl2.GLUT;
 
-public abstract class World implements Renderable, Updateable, Iterable<Entity>, KeyListener {
+public class World implements Renderable, Updateable, Iterable<Entity>, KeyListener {
 
 	private Camera camera;
 	private List<Entity> toRender = new ArrayList<Entity>();
@@ -80,5 +81,14 @@ public abstract class World implements Renderable, Updateable, Iterable<Entity>,
 		camera.init();
 		
 	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {}
+
+	@Override
+	public void keyReleased(KeyEvent e) {}
+
+	@Override
+	public void keyTyped(KeyEvent e) {}
 	
 }

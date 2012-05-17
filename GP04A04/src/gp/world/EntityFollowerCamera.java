@@ -51,12 +51,8 @@ public class EntityFollowerCamera extends Camera {
 	@Override
 	public void prepare(GL2 gl, GLU glu, GLUT glut) {
 
-		setEyeXYZ(followingEntity.getX() + offsetX, followingEntity.getY() + offsetY, followingEntity.getZ() + offsetZ);
-		
-		setCenterX(followingEntity.getDirX());
-		setCenterY(followingEntity.getDirY());
-		setCenterZ(eyeZ);
-		
+		setEyeXYZ(followingEntity.getCurX() + offsetX, followingEntity.getCurY() + offsetY, followingEntity.getCurZ() + offsetZ);
+		setCenterXYZ(followingEntity.getDirX(), followingEntity.getDirY(), eyeZ);
 		setViewUpXYZ(0, 0, 1f);
 		
 		super.prepare(gl, glu, glut);

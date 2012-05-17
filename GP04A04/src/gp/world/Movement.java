@@ -1,7 +1,7 @@
 package gp.world;
 
+import gp.morphing.LinearMorpher;
 import gp.morphing.Morpher;
-import gp.morphing.MorpherStyle;
 
 public class Movement implements Updateable{
 	
@@ -46,7 +46,7 @@ public class Movement implements Updateable{
 	
 	private Morpher morpher;
 	
-	public Movement(float x1, float y1, float z1, float x2, float y2, float z2, float v, MorpherStyle style) {
+	public Movement(float x1, float y1, float z1, float x2, float y2, float z2, float v, Morpher morpher) {
 		this.x1 = x1;
 		this.y1 = y1;
 		this.z1 = z1;
@@ -54,20 +54,19 @@ public class Movement implements Updateable{
 		this.y2 = y2;
 		this.z2 = z2;
 		this.v = v;
-		morpher = style.getFactory().getMorpher(x1, y1, z1, x2, y2, z2, null);
+		this.morpher = morpher;
 	}
 
 	
 	public Movement(float x1, float y1, float z1, float x2, float y2, float z2) {
-		this(x1,y1,z1,x2,y2,z2, 0.1f, MorpherStyle.LINEAR);
+		this(x1,y1,z1,x2,y2,z2, 0.1f, new LinearMorpher());
 		
 	}
 	
 	public Movement(float x1, float y1, float z1, float x2, float y2, float z2, float v) {
-		this(x1,y1,z1,x2,y2,z2, v, MorpherStyle.LINEAR);
+		this(x1,y1,z1,x2,y2,z2, v, new LinearMorpher());
 		
 	}
-
 
 	@Override
 	public void update() {
@@ -85,7 +84,7 @@ public class Movement implements Updateable{
 	}
 	
 	public float[] getCurrentPos() {
-		return morpher.morph(t);
+		return morpher.morph(t, x1, y1, z1, x2, y2, z2);
 	}
 	
 }

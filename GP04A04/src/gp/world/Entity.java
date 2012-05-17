@@ -1,5 +1,7 @@
 package gp.world;
 
+import gp.morphing.QuadraticMorpher;
+
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
@@ -11,6 +13,8 @@ public abstract class Entity implements Renderable, Updateable {
 	protected float x;
 	protected float y;
 	protected float z;
+	
+	private float[] curPos;
 
 	protected float alpha; // blickrichtung
 
@@ -42,13 +46,7 @@ public abstract class Entity implements Renderable, Updateable {
 
 		// gl.glLoadIdentity();
 
-		if (movement != null) {
-			float[] cpos = movement.getCurrentPos();
-
-			gl.glTranslatef(cpos[0], cpos[1], cpos[2]);
-		} else {
-			gl.glTranslatef(x, y, z);
-		}
+		gl.glTranslatef(getCurX(), getCurY(), getCurZ());
 
 		gl.glRotatef(alpha, 0f, 0f, 1f);
 
@@ -66,11 +64,15 @@ public abstract class Entity implements Renderable, Updateable {
 
 		if (movement != null) {
 			movement.update();
+			
+			curPos = movement.getCurrentPos();
+			
 			if (movement.isFinished()) {
 				x = movement.getX2();
 				y = movement.getY2();
 				z = movement.getZ2();
 				movement = null;
+				curPos = null;
 			}
 		}
 
@@ -93,12 +95,24 @@ public abstract class Entity implements Renderable, Updateable {
 
 	public void moveTo(float gx, float gy, float gz) {
 		if (movement == null) {
-			movement = new Movement(x, y, z, gx, gy, gz);
+			final float xm = (gx+x)/2;
+			final float ym = (gy+y)/2;
+			
+			movement = new Movement(x, y, z, gx, gy, gz, 0.1f, new QuadraticMorpher(xm, ym, 2f) );
+			curPos = movement.getCurrentPos();
 		}
 	}
 
 	public void moveRel(float dx, float dy, float dz) {
 		moveTo(x + dx, y + dy, z + dz);
+	}
+	
+	public float[] getCurPos() {
+		if (movement != null) {
+			return movement.getCurrentPos();
+		} else {
+			return new float[] {x,y,z};
+		}
 	}
 
 	public float getAlpha() {
@@ -133,12 +147,35 @@ public abstract class Entity implements Renderable, Updateable {
 		return z;
 	}
 
+	public float getCurX() {
+		if(movement != null) {
+			return curPos[0];
+		} else { 
+			return x;
+		}
+	}
+
+	public float getCurY() {
+		if(movement != null) {
+			return curPos[1];
+		} else { 
+			return y;
+		}
+	}
+
+	public float getCurZ() {
+		if(movement != null) {
+			return curPos[2];
+		} else { 
+			return z;
+		}
+	}
 	public float getDirX() {
-		return x + (float) Math.cos(alpha);
+		return getCurX() + (float) Math.cos(alpha);
 	}
 
 	public float getDirY() {
-		return y + (float) Math.sin(alpha);
+		return getCurY() + (float) Math.sin(alpha);
 	}
 
 }

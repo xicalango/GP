@@ -5,7 +5,7 @@ import javax.media.opengl.glu.GLU;
 
 import com.jogamp.opengl.util.gl2.GLUT;
 
-public class Camera {
+public class Camera implements Updateable{
 
 	// x-Position der Kamera
 	protected float eyeX;
@@ -161,6 +161,12 @@ public class Camera {
 	}
 
 	public void init() {
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

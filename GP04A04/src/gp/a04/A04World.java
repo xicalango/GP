@@ -86,18 +86,40 @@ public class A04World extends World {
 			
 			switch(e.getKeyCode()) {
 			case KeyEvent.VK_1:
-			case KeyEvent.VK_LEFT:
 				figure.setAlpha(figure.getAlpha()  - (float)Math.PI/2);
 				break;
-			case KeyEvent.VK_RIGHT:
-				figure.setAlpha(figure.getAlpha() + (float)Math.PI/2);
-				break;				
 			case KeyEvent.VK_2:
-			case KeyEvent.VK_DOWN:
 				figure.setAlpha(figure.getAlpha() + (float)Math.PI);
 				break;
 			case KeyEvent.VK_3:
 				figure.setAlpha(figure.getAlpha() + (float)Math.PI*3/2);
+				break;
+				
+			case KeyEvent.VK_A:
+				figure.setAlpha(figure.getAlpha()  + (float)Math.PI/2);
+				break;
+				
+			case KeyEvent.VK_D:
+				figure.setAlpha(figure.getAlpha()  - (float)Math.PI/2);
+				break;
+				
+			case KeyEvent.VK_S:
+				figure.setAlpha(figure.getAlpha()  + (float)Math.PI);
+				break;
+
+			case KeyEvent.VK_RIGHT:
+				figure.moveRel( (float)Math.cos(figure.getAlpha() - ((float)Math.PI/2)), (float)Math.sin(figure.getAlpha() - ((float)Math.PI/2)), 0); 
+				break;
+				
+			case KeyEvent.VK_LEFT:
+				figure.moveRel( -(float)Math.cos(figure.getAlpha() + ((float)Math.PI/2)), (float)Math.sin(figure.getAlpha() + ((float)Math.PI/2)), 0); 
+				break;
+
+			case KeyEvent.VK_UP:
+				figure.moveRel( (float)Math.cos(figure.getAlpha()), (float)Math.sin(figure.getAlpha()), 0); 
+				break;
+			case KeyEvent.VK_DOWN:
+				figure.moveRel( -(float)Math.cos(figure.getAlpha()), -(float)Math.sin(figure.getAlpha()), 0); 
 				break;
 			}
 			
