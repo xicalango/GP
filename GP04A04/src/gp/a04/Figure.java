@@ -15,15 +15,17 @@ public class Figure extends Entity {
 		
 		setMaterial(0.7f, 0f, 0.07f);
 	
+		//FUss
 		gl.glTranslatef(0f, 0f, 0.001f);
-		
 		glut.glutSolidCylinder(.33, .25, 32, 5);
 		gl.glTranslatef(0.0f, 0.0f, -0.001f);
-		gl.glTranslatef(0.0f, 0.0f, .25f);
+		
 		// Bauch
+		gl.glTranslatef(0.0f, 0.0f, .25f);
 		glut.glutSolidCone(.33, 1.33, 32, 32);
-		gl.glTranslatef(0f, 0f, 1.1f);
+
 		// Kopf
+		gl.glTranslatef(0f, 0f, 1.1f);
 		glut.glutSolidSphere(.33, 32, 32);
 		
 		gl.glTranslatef(0f, 0f, -1.35f);

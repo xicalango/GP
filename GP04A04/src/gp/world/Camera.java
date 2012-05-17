@@ -150,9 +150,10 @@ public class Camera {
 	}
 	
 	public void prepare(GL2 gl, GLU glu, GLUT glut) {
-		System.out.println(eyeX+ ", " + eyeY+ ", " + eyeZ);
-		System.out.println(viewUpX+ ", " + viewUpY+ ", " + viewUpZ);
-		glu.gluLookAt(eyeX, eyeY, eyeZ, 0, 0, 0, viewUpX, viewUpY, viewUpZ);
+		System.out.println("Eye:    " + eyeX+ ", " + eyeY+ ", " + eyeZ);
+		System.out.println("Center: " + centerX+ ", " + centerY+ ", " + centerZ);
+		System.out.println("ViewUp: " +viewUpX+ ", " + viewUpY+ ", " + viewUpZ);
+		glu.gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, viewUpX, viewUpY, viewUpZ);
 	}
 
 	public void init() { }

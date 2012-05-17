@@ -14,30 +14,25 @@ public abstract class Entity implements Renderable {
 	protected float y;
 	protected float z;
 	
-	protected float alpha;
-	protected float rx;
-	protected float ry;
-	protected float rz;
+	protected float alpha; //blickrichtung
 	
 	private GL2 gl;
 	private GLU glu;
 	private GLUT glut;
 
 	public Entity() {
-		this(0f,0f,0f,0f,0f,1f,0f);
+		this(0f,0f,0f,0f);
 	}
 	
-	public Entity(float x, float y, float z, float rx, float ry, float rz, float alpha) {
+	public Entity(float x, float y, float z, float alpha) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.rx = rx;
-		this.ry = ry;
-		this.rz = rz;
+		this.alpha = alpha;
 	}
 
 	public Entity(float x, float y, float z) {
-		this(x,y,z,0f,0f,1f,0f);
+		this(x,y,z,0f);
 	}
 	
 	@Override
@@ -46,7 +41,7 @@ public abstract class Entity implements Renderable {
 //		gl.glLoadIdentity();
 		
 		gl.glTranslatef(x, y, z);
-		gl.glRotatef(alpha, rx, ry, rz);
+		gl.glRotatef(alpha, 0f, 0f, 1f);
 		
 		this.gl = gl;
 		this.glu = glu;
@@ -93,18 +88,6 @@ public abstract class Entity implements Renderable {
 		this.z = z;
 	}
 
-	public void setRx(float rx) {
-		this.rx = rx;
-	}
-
-	public void setRy(float ry) {
-		this.ry = ry;
-	}
-
-	public void setRz(float rz) {
-		this.rz = rz;
-	}
-
 	public float getX() {
 		return x;
 	}
@@ -116,17 +99,13 @@ public abstract class Entity implements Renderable {
 	public float getZ() {
 		return z;
 	}
-
-	public float getRx() {
-		return rx;
+	
+	public float getDirX() {
+		return x + (float)Math.cos(alpha);
 	}
-
-	public float getRy() {
-		return ry;
-	}
-
-	public float getRz() {
-		return rz;
+	
+	public float getDirY() {
+		return y + (float)Math.sin(alpha);
 	}
 
 }

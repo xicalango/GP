@@ -2,6 +2,7 @@ package gp.a04;
 
 import gp.world.Camera;
 import gp.world.Entity;
+import gp.world.EntityFollowerCamera;
 import gp.world.SphereCamera;
 import gp.world.World;
 
@@ -15,9 +16,14 @@ import com.jogamp.opengl.util.gl2.GLUT;
 public class A04World extends World<Entity> {
 
 	private static final float DELTA = 0.07f;
-	private Camera camera;
+	//private Camera camera;
+	
+	private Camera standardCamera;
+	private EntityFollowerCamera efCamera;
+	
 	private Figure figure;
 	private Chessboard chessboard;
+	
 	
 	private enum CamPos {
 		TOP,
@@ -29,20 +35,23 @@ public class A04World extends World<Entity> {
 	public A04World() {
 		super();
 		
-		camera = new Camera();
-		camera.setEyeXYZ(10.00f, 0f, 0.0f);
-		
-		setCamera(camera);
 		
 		figure = new Figure();
 		figure.setX(0.5f);
 		figure.setY(0.5f);
+		figure.setZ(0f);
 		add(figure);
 		
 		chessboard = new Chessboard();
 		add(chessboard);
 		
+		standardCamera = new Camera();
+		standardCamera.setEyeXYZ(0f, -3f, 7f);
+		standardCamera.setViewUpXYZ(0f, 1f, 0f);
 		
+		setCamera(standardCamera);
+
+		efCamera = new EntityFollowerCamera(figure, 0, 0, 1.35f);
 	}
 
 	@Override
@@ -66,11 +75,57 @@ public class A04World extends World<Entity> {
 	@Override
 	public void keyPressed(KeyEvent e) {
 
+		
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_ENTER:
 			toggleCamPos();
 			break;
 		}
+
+		if( pos == CamPos.FIGURE) {
+			
+			switch(e.getKeyCode()) {
+			case KeyEvent.VK_1:
+			case KeyEvent.VK_LEFT:
+				figure.setAlpha(figure.getAlpha()  - (float)Math.PI/2);
+				break;
+			case KeyEvent.VK_RIGHT:
+				figure.setAlpha(figure.getAlpha() + (float)Math.PI/2);
+				break;				
+			case KeyEvent.VK_2:
+			case KeyEvent.VK_DOWN:
+				figure.setAlpha(figure.getAlpha() + (float)Math.PI);
+				break;
+			case KeyEvent.VK_3:
+				figure.setAlpha(figure.getAlpha() + (float)Math.PI*3/2);
+				break;
+			}
+			
+		}
+		
+		if( pos == CamPos.TOP) {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_LEFT:
+				figure.setX(figure.getX() - 1);
+				break;
+			case KeyEvent.VK_RIGHT:
+				figure.setX(figure.getX() + 1);
+				break;
+				
+			case KeyEvent.VK_UP:
+				figure.setY(figure.getY() + 1);
+				break;
+				
+			case KeyEvent.VK_DOWN:
+				figure.setY(figure.getY() - 1);
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		
 
 		
 	}
@@ -78,10 +133,10 @@ public class A04World extends World<Entity> {
 	private void toggleCamPos() {
 		if(pos == CamPos.TOP) {
 			pos = CamPos.FIGURE;
-			
-			
+			setCamera(efCamera);
 		} else if(pos == CamPos.FIGURE) {
 			pos = CamPos.TOP;
+			setCamera(standardCamera);
 		}
 		
 		
