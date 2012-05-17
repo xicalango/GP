@@ -1,19 +1,20 @@
 package gp.gui;
 
+import gp.world.World;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import gp.world.World;
 
 import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLProfile;
 import javax.swing.JFrame;
 
-import com.jogamp.opengl.util.Animator;
 import com.jogamp.opengl.util.FPSAnimator;
 
 public class WorldRenderFrame extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
 	private WinRenderer renderer;
 	private FPSAnimator animator;
 

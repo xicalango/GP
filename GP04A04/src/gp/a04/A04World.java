@@ -1,10 +1,8 @@
 package gp.a04;
 
-import gp.world.Entity;
 import gp.world.World;
 import gp.world.camera.Camera;
 import gp.world.camera.EntityFollowerCamera;
-import gp.world.camera.SphereCamera;
 
 import java.awt.event.KeyEvent;
 
@@ -15,7 +13,7 @@ import com.jogamp.opengl.util.gl2.GLUT;
 
 public class A04World extends World {
 
-	private static final float DELTA = 0.07f;
+	//private static final float DELTA = 0.07f;
 	//private Camera camera;
 	
 	private Camera standardCamera;

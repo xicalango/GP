@@ -48,8 +48,8 @@ public class WinRenderer extends GLCanvas implements GLEventListener, java.awt.e
 		final GLU glu = new GLU();
 		final GLUT glut = new GLUT();
 		
-		gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT);
-		gl.glEnable(gl.GL_DEPTH_TEST);
+		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+		gl.glEnable(GL2.GL_DEPTH_TEST);
 		gl.glLoadIdentity();
 
 		world.render(gl, glu, glut);

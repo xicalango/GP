@@ -1,7 +1,6 @@
 package gp.a04;
 
 import gp.world.Entity;
-import gp.world.Margins;
 
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
