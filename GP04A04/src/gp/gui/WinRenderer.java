@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.awt.GLCanvas;
 import javax.media.opengl.glu.GLU;
@@ -16,12 +17,12 @@ public class WinRenderer extends GLCanvas implements GLEventListener, java.awt.e
 
 	private static final long serialVersionUID = 1L;
 
-	private World<?> world;
+	private World world;
 
-	public WinRenderer(World<?> world) {
+	public WinRenderer(GLCapabilities cap, World world) {
+		super(cap);
 		this.world = world;
 		addGLEventListener(this);
-
 	}
 
 	@Override
@@ -29,7 +30,7 @@ public class WinRenderer extends GLCanvas implements GLEventListener, java.awt.e
 		world.init();
 		
 		addKeyListener(world);
-		addKeyListener(this);
+//		addKeyListener(this);
 	}
 
 	@Override
@@ -41,6 +42,8 @@ public class WinRenderer extends GLCanvas implements GLEventListener, java.awt.e
 	@Override
 	public void display(GLAutoDrawable drawable) {
 
+		world.update();
+		
 		final GL2 gl = drawable.getGL().getGL2();
 		final GLU glu = new GLU();
 		final GLUT glut = new GLUT();

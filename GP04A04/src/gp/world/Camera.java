@@ -26,31 +26,33 @@ public class Camera {
 	// z-Koordinate des view-up-Vektors
 	protected float viewUpZ = 1;
 	// x-Endpunkt der Kimme
-		
+
+	private static final boolean DEBUG = false;
+
 	public float getEyeX() {
 		return eyeX;
 	}
-	
+
 	public void setEyeX(float eyeX) {
 		this.eyeX = eyeX;
 	}
-	
+
 	public float getEyeY() {
 		return eyeY;
 	}
-	
+
 	public void setEyeY(float eyeY) {
 		this.eyeY = eyeY;
 	}
-	
+
 	public float getEyeZ() {
 		return eyeZ;
 	}
-	
+
 	public void setEyeZ(float eyeZ) {
 		this.eyeZ = eyeZ;
 	}
-	
+
 	public float getCenterX() {
 		return centerX;
 	}
@@ -78,27 +80,27 @@ public class Camera {
 	public float getViewUpX() {
 		return viewUpX;
 	}
-	
+
 	public void setViewUpX(float viewUpX) {
 		this.viewUpX = viewUpX;
 	}
-	
+
 	public float getViewUpY() {
 		return viewUpY;
 	}
-	
+
 	public void setViewUpY(float viewUpY) {
 		this.viewUpY = viewUpY;
 	}
-	
+
 	public float getViewUpZ() {
 		return viewUpZ;
 	}
-	
+
 	public void setViewUpZ(float viewUpZ) {
 		this.viewUpZ = viewUpZ;
 	}
-	
+
 	public float getViewUpEndX() {
 		return eyeX + viewUpX;
 	}
@@ -110,16 +112,16 @@ public class Camera {
 	public float getViewUpEndZ() {
 		return eyeZ + viewUpZ;
 	}
-	
-	public void setViewUpEndX( float viewUpEndX ) {
+
+	public void setViewUpEndX(float viewUpEndX) {
 		viewUpX = viewUpEndX - eyeX;
 	}
 
-	public void setViewUpEndY( float viewUpEndY ) {
+	public void setViewUpEndY(float viewUpEndY) {
 		viewUpY = viewUpEndY - eyeY;
 	}
 
-	public void setViewUpEndZ( float viewUpEndZ ) {
+	public void setViewUpEndZ(float viewUpEndZ) {
 		viewUpZ = viewUpEndZ - eyeZ;
 	}
 
@@ -128,19 +130,19 @@ public class Camera {
 		eyeY = y;
 		eyeZ = z;
 	}
-	
+
 	public void setCenterXYZ(float x, float y, float z) {
 		centerX = x;
 		centerY = y;
 		centerZ = z;
 	}
-	
+
 	public void setViewUpXYZ(float x, float y, float z) {
 		viewUpX = x;
 		viewUpY = y;
 		viewUpZ = z;
 	}
-	
+
 	public void printCameraInfo() {
 		float produkt = eyeX * viewUpX + eyeY * viewUpY + eyeZ * viewUpZ;
 		float length_eye = (float) Math.sqrt(eyeX * eyeX + eyeY * eyeY + eyeZ * eyeZ);
@@ -148,15 +150,17 @@ public class Camera {
 		float angle = (float) Math.acos(produkt / (length_eye * length_view_up));
 		System.out.println("Winkel zwischen Blickrichtung und view-up-Vektor: " + angle / Math.PI * 180);
 	}
-	
+
 	public void prepare(GL2 gl, GLU glu, GLUT glut) {
-		System.out.println("Eye:    " + eyeX+ ", " + eyeY+ ", " + eyeZ);
-		System.out.println("Center: " + centerX+ ", " + centerY+ ", " + centerZ);
-		System.out.println("ViewUp: " +viewUpX+ ", " + viewUpY+ ", " + viewUpZ);
+		if (DEBUG) {
+			System.out.println("Eye:    " + eyeX + ", " + eyeY + ", " + eyeZ);
+			System.out.println("Center: " + centerX + ", " + centerY + ", " + centerZ);
+			System.out.println("ViewUp: " + viewUpX + ", " + viewUpY + ", " + viewUpZ);
+		}
 		glu.gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, viewUpX, viewUpY, viewUpZ);
 	}
 
-	public void init() { }
-	
-	
+	public void init() {
+	}
+
 }

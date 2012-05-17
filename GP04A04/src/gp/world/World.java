@@ -11,10 +11,10 @@ import javax.media.opengl.glu.GLU;
 
 import com.jogamp.opengl.util.gl2.GLUT;
 
-public abstract class World<T extends Renderable> implements Renderable, Iterable<T>, KeyListener {
+public abstract class World implements Renderable, Updateable, Iterable<Entity>, KeyListener {
 
 	private Camera camera;
-	private List<T> toRender = new ArrayList<T>();
+	private List<Entity> toRender = new ArrayList<Entity>();
 	
 	public World() {
 		this(new Camera());
@@ -32,11 +32,11 @@ public abstract class World<T extends Renderable> implements Renderable, Iterabl
 		this.camera = camera;
 	}
 	
-	public boolean add(T arg0) {
+	public boolean add(Entity arg0) {
 		return toRender.add(arg0);
 	}
 
-	public T get(int arg0) {
+	public Entity get(int arg0) {
 		return toRender.get(arg0);
 	}
 
@@ -61,11 +61,18 @@ public abstract class World<T extends Renderable> implements Renderable, Iterabl
 			r.render(gl, glu, glut);
 		}
 	}
+	
+	@Override
+	public void update() {
+		for(Updateable u : this) {
+			u.update();
+		}
+	}
 
 	protected void setupWorld( GL2 gl, GLU glu, GLUT glut) {}
 	
 	@Override
-	public Iterator<T> iterator() {
+	public Iterator<Entity> iterator() {
 		return toRender.iterator();
 	}
 

@@ -1,6 +1,6 @@
 package gp.a04;
 
-import gp.gui.GLFrame;
+import gp.gui.WorldRenderFrame;
 import gp.gui.WinRenderer;
 
 public class A04 {
@@ -10,7 +10,7 @@ public class A04 {
 	 */
 	public static void main(String[] args) {
 
-		new GLFrame(new WinRenderer(new A04World()));
+		new WorldRenderFrame(new A04World());
 
 	}
 

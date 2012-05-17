@@ -13,7 +13,7 @@ import javax.media.opengl.glu.GLU;
 
 import com.jogamp.opengl.util.gl2.GLUT;
 
-public class A04World extends World<Entity> {
+public class A04World extends World {
 
 	private static final float DELTA = 0.07f;
 	//private Camera camera;
@@ -106,18 +106,18 @@ public class A04World extends World<Entity> {
 		if( pos == CamPos.TOP) {
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_LEFT:
-				figure.setX(figure.getX() - 1);
+				figure.moveRel(-1, 0, 0);
 				break;
 			case KeyEvent.VK_RIGHT:
-				figure.setX(figure.getX() + 1);
+				figure.moveRel(1, 0, 0);
 				break;
 				
 			case KeyEvent.VK_UP:
-				figure.setY(figure.getY() + 1);
+				figure.moveRel(0, 1, 0);
 				break;
 				
 			case KeyEvent.VK_DOWN:
-				figure.setY(figure.getY() - 1);
+				figure.moveRel(0, -1, 0);
 				break;
 
 			default:
