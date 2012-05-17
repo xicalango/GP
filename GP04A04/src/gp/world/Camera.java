@@ -13,6 +13,12 @@ public class Camera {
 	protected float eyeY;
 	// z-Position der Kamera
 	protected float eyeZ;
+	// x-Position der Kamera
+	protected float centerX;
+	// y-Position der Kamera
+	protected float centerY;
+	// z-Position der Kamera
+	protected float centerZ;
 	// x-Koordinate des view-up-Vektors
 	protected float viewUpX = 0;
 	// y-Koordinate des view-up-Vektors
@@ -45,6 +51,30 @@ public class Camera {
 		this.eyeZ = eyeZ;
 	}
 	
+	public float getCenterX() {
+		return centerX;
+	}
+
+	public void setCenterX(float centerX) {
+		this.centerX = centerX;
+	}
+
+	public float getCenterY() {
+		return centerY;
+	}
+
+	public void setCenterY(float centerY) {
+		this.centerY = centerY;
+	}
+
+	public float getCenterZ() {
+		return centerZ;
+	}
+
+	public void setCenterZ(float centerZ) {
+		this.centerZ = centerZ;
+	}
+
 	public float getViewUpX() {
 		return viewUpX;
 	}
@@ -93,8 +123,25 @@ public class Camera {
 		viewUpZ = viewUpEndZ - eyeZ;
 	}
 
+	public void setEyeXYZ(float x, float y, float z) {
+		eyeX = x;
+		eyeY = y;
+		eyeZ = z;
+	}
 	
-	public void cameraInfo() {
+	public void setCenterXYZ(float x, float y, float z) {
+		centerX = x;
+		centerY = y;
+		centerZ = z;
+	}
+	
+	public void setViewUpXYZ(float x, float y, float z) {
+		viewUpX = x;
+		viewUpY = y;
+		viewUpZ = z;
+	}
+	
+	public void printCameraInfo() {
 		float produkt = eyeX * viewUpX + eyeY * viewUpY + eyeZ * viewUpZ;
 		float length_eye = (float) Math.sqrt(eyeX * eyeX + eyeY * eyeY + eyeZ * eyeZ);
 		float length_view_up = (float) Math.sqrt(viewUpX * viewUpX + viewUpY * viewUpY + viewUpZ * viewUpZ);

@@ -14,6 +14,7 @@ public abstract class Entity implements Renderable {
 	protected float y;
 	protected float z;
 	
+	protected float alpha;
 	protected float rx;
 	protected float ry;
 	protected float rz;
@@ -23,10 +24,10 @@ public abstract class Entity implements Renderable {
 	private GLUT glut;
 
 	public Entity() {
-		this(0f,0f,0f,0f,0f,0f);
+		this(0f,0f,0f,0f,0f,1f,0f);
 	}
 	
-	public Entity(float x, float y, float z, float rx, float ry, float rz) {
+	public Entity(float x, float y, float z, float rx, float ry, float rz, float alpha) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -36,7 +37,7 @@ public abstract class Entity implements Renderable {
 	}
 
 	public Entity(float x, float y, float z) {
-		this(x,y,z,0f,0f,0f);
+		this(x,y,z,0f,0f,1f,0f);
 	}
 	
 	@Override
@@ -45,6 +46,7 @@ public abstract class Entity implements Renderable {
 //		gl.glLoadIdentity();
 		
 		gl.glTranslatef(x, y, z);
+		gl.glRotatef(alpha, rx, ry, rz);
 		
 		this.gl = gl;
 		this.glu = glu;
@@ -52,7 +54,7 @@ public abstract class Entity implements Renderable {
 		
 		_render(gl, glu, glut);
 		
-		gl.glTranslatef(-x, -y, -z);
+		//gl.glTranslatef(-x, -y, -z);
 	}
 
 	protected abstract void _render(GL2 gl, GLU glu, GLUT glut);
@@ -70,6 +72,14 @@ public abstract class Entity implements Renderable {
 
 	}
 	
+	
+	public float getAlpha() {
+		return alpha;
+	}
+
+	public void setAlpha(float alpha) {
+		this.alpha = alpha;
+	}
 
 	public void setX(float x) {
 		this.x = x;

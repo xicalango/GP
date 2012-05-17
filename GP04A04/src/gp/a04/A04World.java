@@ -1,5 +1,6 @@
 package gp.a04;
 
+import gp.world.Camera;
 import gp.world.Entity;
 import gp.world.SphereCamera;
 import gp.world.World;
@@ -14,14 +15,23 @@ import com.jogamp.opengl.util.gl2.GLUT;
 public class A04World extends World<Entity> {
 
 	private static final float DELTA = 0.07f;
-	private SphereCamera camera;
+	private Camera camera;
 	private Figure figure;
 	private Chessboard chessboard;
+	
+	private enum CamPos {
+		TOP,
+		FIGURE
+	}
+	
+	private CamPos pos = CamPos.TOP;
 
 	public A04World() {
 		super();
 		
-		camera = new SphereCamera();
+		camera = new Camera();
+		camera.setEyeXYZ(10.00f, 0f, 0.0f);
+		
 		setCamera(camera);
 		
 		figure = new Figure();
@@ -56,32 +66,24 @@ public class A04World extends World<Entity> {
 	@Override
 	public void keyPressed(KeyEvent e) {
 
-		switch (e.getKeyCode()) {
-		// Laengengrad erhoehen
-		case KeyEvent.VK_RIGHT:
-			camera.rotateLng(DELTA);
-			break;
-		// Laengengrad erniedrigen
-		case KeyEvent.VK_LEFT:
-			camera.rotateLng(-DELTA);
-			break;
-		// Breitengrad erhoehen
-		case KeyEvent.VK_UP:
-			camera.rotateLat(DELTA);
-			break;
-		// Breitengrad erniedrigen
-		case KeyEvent.VK_DOWN:
-			camera.rotateLat(-DELTA);
-			break;
-		// view-up nach rechts rotieren
-		case KeyEvent.VK_R:
-			camera.rotateLR(DELTA);
-			break;
-		// view-up nach links rotieren
-		case KeyEvent.VK_L:
-			camera.rotateLR(-DELTA);
+		switch(e.getKeyCode()) {
+		case KeyEvent.VK_ENTER:
+			toggleCamPos();
 			break;
 		}
+
+		
+	}
+
+	private void toggleCamPos() {
+		if(pos == CamPos.TOP) {
+			pos = CamPos.FIGURE;
+			
+			
+		} else if(pos == CamPos.FIGURE) {
+			pos = CamPos.TOP;
+		}
+		
 		
 	}
 

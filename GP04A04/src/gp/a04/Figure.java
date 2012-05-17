@@ -14,7 +14,7 @@ public class Figure extends Entity {
 	public void _render(GL2 gl, GLU glu, GLUT glut) {
 		
 		setMaterial(0.7f, 0f, 0.07f);
-
+	
 		gl.glTranslatef(0f, 0f, 0.001f);
 		
 		glut.glutSolidCylinder(.33, .25, 32, 5);
