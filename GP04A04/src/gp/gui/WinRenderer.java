@@ -71,6 +71,7 @@ public class WinRenderer extends GLCanvas implements GLEventListener, java.awt.e
 		gl.glLoadIdentity();
 		// Zentralprojektion waehlen
 		glu.gluPerspective(90, (float) width / (float) height, 1, 100);
+		//gl.glOrthof(-1, 1, -1, 1, -1, 1);
 		// und wieder auf Modellmatrix zuruecksetzen
 		gl.glMatrixMode(GL2.GL_MODELVIEW);
 

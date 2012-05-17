@@ -1,6 +1,8 @@
 package gp.world;
 
 
+import gp.world.camera.Camera;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;

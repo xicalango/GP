@@ -1,4 +1,4 @@
-package gp.world;
+package gp.world.camera;
 
 public class SphereCamera extends Camera {
 

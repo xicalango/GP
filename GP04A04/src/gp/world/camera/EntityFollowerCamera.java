@@ -1,4 +1,6 @@
-package gp.world;
+package gp.world.camera;
+
+import gp.world.Entity;
 
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;

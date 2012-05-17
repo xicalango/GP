@@ -1,10 +1,10 @@
 package gp.a04;
 
-import gp.world.Camera;
 import gp.world.Entity;
-import gp.world.EntityFollowerCamera;
-import gp.world.SphereCamera;
 import gp.world.World;
+import gp.world.camera.Camera;
+import gp.world.camera.EntityFollowerCamera;
+import gp.world.camera.SphereCamera;
 
 import java.awt.event.KeyEvent;
 
