@@ -3,11 +3,14 @@ package gp.a04;
 import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import gp.gui.WorldRenderFrame;
 
 public class GameRenderFrame extends WorldRenderFrame implements ScoreUpdater {
 
+	private static final int SCORE_LIMIT = 10;
+	
 	private JLabel scoreLabel;
 	
 	public GameRenderFrame(A04World world) {
@@ -27,6 +30,17 @@ public class GameRenderFrame extends WorldRenderFrame implements ScoreUpdater {
 	@Override
 	public void updateScore(int score1, int score2) {
 		scoreLabel.setText("Player1: " + score1 + " Player2: " + score2);
+		
+		if(score1 >= SCORE_LIMIT) {
+			JOptionPane.showMessageDialog(this, "Player 1 wins!");
+			quit();
+		} else if(score2 >= SCORE_LIMIT) {
+			JOptionPane.showMessageDialog(this, "Player 2 wins!");
+			quit();
+		}
+		
+		
+		
 	}
 
 }

@@ -47,7 +47,9 @@ public class WorldRenderFrame extends JFrame {
 		renderer.requestFocus();
 	}
 
-
+	public void quit() {
+		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	}
 	
 	
 	

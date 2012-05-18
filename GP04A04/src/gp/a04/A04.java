@@ -1,6 +1,5 @@
 package gp.a04;
 
-import gp.gui.WorldRenderFrame;
 
 public class A04 {
 
