@@ -9,37 +9,21 @@ public class GP04A02 {
 
 		Polygon3D p1 = Polygon3D.fromArray(polygon1);
 		Polygon3D p2 = Polygon3D.fromArray(polygon2);
-
-		System.out.println(p1);
-		System.out.println(p2);
 		
 		Vector3D p11 = p1.getPoint(0);
 		Vector3D p12 = p1.getPoint(1);
 		Vector3D p13 = p1.getPoint(2);
-
-		System.out.println(p11);
-		System.out.println(p12);
-		System.out.println(p13);
 		
 		Vector3D v12 = Vector3D.getBetween(p11, p12);
 		Vector3D v13 = Vector3D.getBetween(p11, p13);
-		
-		System.out.println(v12);
-		System.out.println(v13);
 
 		Vector3D n = v12.vectorProduct(v13);
-		
-		System.out.println(n);
 		
 		Vector3D[] p2points = p2.getPoints();
 
 		float s = Math.signum(n.scalarProduct(Vector3D.getBetween(p11, p2points[0])));
 
-		System.out.println(s);
-		
 		for (int i = 1; i < p2points.length; i++) {
-
-			System.out.println(n.scalarProduct(Vector3D.getBetween(p11, p2points[i])));
 			if (Math.signum(n.scalarProduct(Vector3D.getBetween(p11, p2points[i]))) != s) {
 				return false;
 			}
