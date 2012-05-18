@@ -9,7 +9,10 @@ public class A04 {
 	 */
 	public static void main(String[] args) {
 
-		new WorldRenderFrame(new A04World());
+		A04World world = new A04World();
+		
+		new GameRenderFrame(world);
+		
 
 	}
 

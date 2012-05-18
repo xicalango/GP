@@ -2,6 +2,7 @@ package gp.gui;
 
 import gp.world.World;
 
+import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -20,6 +21,8 @@ public class WorldRenderFrame extends JFrame {
 
 	public WorldRenderFrame(World world) {
 		
+		setLayout(new BorderLayout());
+		
 		GLCapabilities cap = new GLCapabilities(GLProfile.getDefault());
 		cap.setDoubleBuffered(true);
 		
@@ -28,7 +31,7 @@ public class WorldRenderFrame extends JFrame {
 		
 		setSize(640,480);
 		
-		add(renderer);
+		add(renderer, BorderLayout.CENTER);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		addWindowListener(new WindowAdapter() {

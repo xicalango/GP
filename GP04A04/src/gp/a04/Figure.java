@@ -10,10 +10,14 @@ import com.jogamp.opengl.util.gl2.GLUT;
 
 public class Figure extends Entity {
 
+	private float r = 0.7f;
+	private float g = 0f;
+	private float b = 0.07f;
+	
 	@Override
 	public void _render(GL2 gl, GLU glu, GLUT glut) {
 		
-		setMaterial(0.7f, 0f, 0.07f);
+		setMaterial(r, g, b);
 	
 		//FUss
 		gl.glTranslatef(0f, 0f, 0.001f);
@@ -30,6 +34,30 @@ public class Figure extends Entity {
 		
 		gl.glTranslatef(0f, 0f, -1.35f);
 		
+	}
+
+	public float getR() {
+		return r;
+	}
+
+	public void setR(float r) {
+		this.r = r;
+	}
+
+	public float getG() {
+		return g;
+	}
+
+	public void setG(float g) {
+		this.g = g;
+	}
+
+	public float getB() {
+		return b;
+	}
+
+	public void setB(float b) {
+		this.b = b;
 	}
 
 
