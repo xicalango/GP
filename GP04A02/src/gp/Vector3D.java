@@ -102,6 +102,14 @@ public class Vector3D {
 		return new Vector3D(a[0], a[1], a[2]);
 	}
 	
+	public static Vector3D getBetween(Vector3D a, Vector3D b) {
+		return b.sub(a);
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + x + "," + y + "," + z + ")";
+	}
 	
 	
 }

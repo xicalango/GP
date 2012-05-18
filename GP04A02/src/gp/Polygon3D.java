@@ -52,4 +52,17 @@ public class Polygon3D implements Iterable<Vector3D> {
 		return Arrays.asList(points).iterator();
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("Polygon( ");
+		
+		for( Vector3D v : this) {
+			sb.append(v.toString());
+			sb.append(",");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		sb.append(" )");
+		return sb.toString();
+	}
+	
 }
