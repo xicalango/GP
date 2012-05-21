@@ -1,8 +1,7 @@
 package gp;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
 
 import javax.swing.JPanel;
 
@@ -83,7 +82,9 @@ public class ParabelPanel extends JPanel {
 
 			if( (height/2) -(int)pos[1] > (height/2)) break;
 			
-			g.drawOval((int)pos[0], (height/2)-(int)asc[1], 2, 2);
+			//g.drawOval((int)pos[0], (height/2)-(int)asc[1], 2, 2);
+			
+			g.setColor(Color.GRAY);
 			
 			g.drawOval((int)pos[0], (height/2) -(int)pos[1], 1, 1);
 			
@@ -97,9 +98,7 @@ public class ParabelPanel extends JPanel {
 		final float x = pos[0];
 		final float y = (height/2) - pos[1] > (height/2) ? (height/2) : (height/2) - pos[1];
 		
-		final float phi = (float)Math.atan(getGradient(time)[1]/10.0);
-		System.out.println(Math.toDegrees(phi));
-		System.out.println(getGradient(time)[1]);
+		final float phi = (float)Math.atan(getGradient(time)[1])/2.0f;
 		
 		final float x1 = x - (float)Math.cos(phi) * spearLength;
 		final float y1 = y + (float)Math.sin(phi) * spearLength;
@@ -107,19 +106,26 @@ public class ParabelPanel extends JPanel {
 		final float x2 = x + (float)Math.cos(phi) * spearLength;
 		final float y2 = y - (float)Math.sin(phi) * spearLength;
 		
+		g.setColor(Color.RED);
+		
 		g.drawLine((int)x1, (int)y1, (int)x2, (int)y2);
 
-		g.drawOval((int)(x-5), (int)(y-5), 10, 10);
+		g.setColor(Color.GRAY);
+		
+		g.drawOval((int)(x-5), (int)(y-5), 2, 2);
 	}
 
 	private void drawAccVector(Graphics g) {
 		final float xv = v0 * (float)Math.cos(beta);
 		final float yv = v0 * (float)Math.sin(beta);
 		
+		g.setColor(Color.green);
+		
 		g.drawLine(0, (height/2), (int)xv, (int)((height/2) -yv));
 	}
 
 	private void drawHorizont(Graphics g) {
+		g.setColor(Color.BLACK);
 		g.drawLine(0, (height/2), width, (height/2));
 	}
 	
