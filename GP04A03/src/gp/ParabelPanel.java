@@ -98,13 +98,13 @@ public class ParabelPanel extends JPanel {
 		final float x = pos[0];
 		final float y = (height/2) - pos[1] > (height/2) ? (height/2) : (height/2) - pos[1];
 		
-		final float phi = (float)Math.atan(getGradient(time)[1])/2.0f;
+		final float phi = (float)Math.atan(getGradient(time)[1])/2.0f; //Steigungswinkel der Wurfparabel zum Zeitpunkt 'time'
 		
-		final float x1 = x - (float)Math.cos(phi) * spearLength;
-		final float y1 = y + (float)Math.sin(phi) * spearLength;
+		final float x1 = x - (float)Math.cos(phi) * (spearLength/2);
+		final float y1 = y + (float)Math.sin(phi) * (spearLength/2); //Punkt des hinteren Endes des Speers 
 
-		final float x2 = x + (float)Math.cos(phi) * spearLength;
-		final float y2 = y - (float)Math.sin(phi) * spearLength;
+		final float x2 = x + (float)Math.cos(phi) * (spearLength/2);
+		final float y2 = y - (float)Math.sin(phi) * (spearLength/2); //Punkt des vorderen Endes des Speers
 		
 		g.setColor(Color.RED);
 		
@@ -129,14 +129,14 @@ public class ParabelPanel extends JPanel {
 		g.drawLine(0, (height/2), width, (height/2));
 	}
 	
-	private float[] getGradient(float t) {
+	private float[] getGradient(float t) { //Ableitungsfunktion der Wurfparabel 
 		return new float[] {
 				v0 * (float)Math.cos(beta),
 				v0 * (float)Math.sin(beta) - G * t
 		};
 	}
 	
-	private float[] getPos(float t) {
+	private float[] getPos(float t) { //Positionsfunktion der Wurfparabel
 		return new float[] {
 				v0 * t * (float)Math.cos(beta),
 				v0 * t * (float)Math.sin(beta) - (G/2 * t * t)

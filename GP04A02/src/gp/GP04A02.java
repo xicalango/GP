@@ -14,17 +14,21 @@ public class GP04A02 {
 		Vector3D p12 = p1.getPoint(1);
 		Vector3D p13 = p1.getPoint(2);
 		
-		Vector3D v12 = Vector3D.getBetween(p11, p12);
-		Vector3D v13 = Vector3D.getBetween(p11, p13);
+		Vector3D v12 = Vector3D.getBetween(p11, p12); // Vektor p11-p12
+		Vector3D v13 = Vector3D.getBetween(p11, p13); // Vektor p11-p13
 
-		Vector3D n = v12.vectorProduct(v13);
+		Vector3D n = v12.vectorProduct(v13); // (nicht normierter) Normalenvektor auf die Ebene, die vom erste Polygon gebildet wird. 
 		
 		Vector3D[] p2points = p2.getPoints();
 
-		float s = Math.signum(n.scalarProduct(Vector3D.getBetween(p11, p2points[0])));
+		// Vorzeichen des Skalarprodukts zwischen dem Normalenvektor und dem Verbindungsvektor des ersten Punkts des ersten Polygons und dem ersten Punkt des zweiten Polygons
+		float s = Math.signum(n.scalarProduct(Vector3D.getBetween(p11, p2points[0]))); 
 
 		for (int i = 1; i < p2points.length; i++) {
-			if (Math.signum(n.scalarProduct(Vector3D.getBetween(p11, p2points[i]))) != s) {
+			if (Math.signum(n.scalarProduct(Vector3D.getBetween(p11, p2points[i]))) != s) { 
+				// Falls sich das Vorzeichen des Skalarprodukts zwischen dem Normalenvektor und 
+				// dem Verbindungsvektor des ersten Punkts des ersten Polygons und dem n-ten Punkt des zweiten Polygons
+				// unterscheidet, liegt es nichtmehr auf der selben Seite => Abbruch.
 				return false;
 			}
 
