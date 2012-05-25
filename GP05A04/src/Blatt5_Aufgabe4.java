@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.SortedSet;
@@ -37,7 +38,7 @@ public class Blatt5_Aufgabe4 {
 
 		@Override
 		public int compare(int[] o1, int[] o2) {
-			return o2[p.pos] - o1[p.pos];
+			return o1[p.pos] - o2[p.pos];
 		}
 	}
 	
@@ -66,6 +67,10 @@ public class Blatt5_Aufgabe4 {
 		
 		return result;
 	}
+	
+	public static boolean in_bounding_box(int[][] bounding_box, int x, int y) {
+		return x >= bounding_box[0][0] && x <= bounding_box[1][0] && y >= bounding_box[0][1] && y <= bounding_box[1][1];
+	}
 
 	public static void ppp(int[][] polygon) {
 		for( int[] p : polygon ) {
@@ -77,22 +82,66 @@ public class Blatt5_Aufgabe4 {
 	public static boolean liegt_innerhalb(int[][] polygon, int x_a, int y_a) {
 		// TODO: Spezifikation des �bungsblattes implementieren
 		
-		ppp(get_bounding_box(polygon));
 		
-		return true;
+		int[] inters = getSortedIntersections(polygon, get_bounding_box(polygon), y_a);
+		
+		for( int i = 0; i < inters.length-1; i++ ) {
+			
+			System.out.println(inters[i]+","+x_a+","+inters[i+1]);
+			
+			if( x_a >= inters[i] && x_a <= inters[i+1]) {
+				return (i%2) == 0;
+			}
+		}
+		
+		
+		
+		return false;
 	}
 	
-	public static int[][] getSortedIntersections(int[][] polygon, int[][] bounding_box, int y) {
+	public static <T> T getArrayRing(T[] array, int ix) {
+		return array[ix % array.length];
+	}
+	
+	public static boolean point_on_line(int x1, int y1, int x2, int y2, int xp, int yp) {
+		return (xp - x1) * (y2 - y1) - (yp - y1)*(x2 - x1) == 0 && (xp-x1)*(xp-x2) <= 0 ;
+	}
+	
+	public static int[] getSortedIntersections(int[][] polygon, int[][] bounding_box, int y) {
 		
-		SortedSet<int[]> res = new TreeSet<int[]>(new PointComparator());
+		SortedSet<Integer> intersList = new TreeSet<Integer>();
 		
-		int[][] gerade = {
-				{bounding_box[0][0],y},
-				{bounding_box[1][0],y}
-		};
+		final int nPoints = polygon.length;
 		
-		return res.toArray(new int[0][]);
+		for( int i = 0; i < nPoints; i++ ) {
+			final int[] p1 = polygon[i % nPoints];
+			final int[] p2 = polygon[(i+1) % nPoints];
+			
+			System.out.println(i+"-"+(i+1)%nPoints+":"+Arrays.toString(p1)+"-"+Arrays.toString(p2));
+			
+			if(p1[1] == p2[1]) //gleiche y-Koordinaten => ignorieren
+				continue;
+			
+			final int nom = (y - p1[1]) * (p2[0] - p1[0]);
+			final int xs = p1[0] + nom/(p2[1] - p1[1]);
+			
+			if(in_bounding_box(bounding_box, xs, y) && point_on_line(p1[0], p1[1], p2[0], p2[1], xs, y))
+			{
+				System.out.println(xs + " Taken");
+				intersList.add(xs);
+			} else {
+				System.out.println(xs + " Rejected");
+			}
+		}
 		
+		int[] inters = new int[intersList.size()];
+		int i = 0;
+		
+		for( int is : intersList ) {
+			inters[i++] = is;
+		}
+		
+		return inters;
 	}
 
 	public static void main(String[] args) {
