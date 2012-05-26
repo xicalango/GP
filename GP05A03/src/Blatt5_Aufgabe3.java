@@ -12,8 +12,6 @@ public class Blatt5_Aufgabe3 {
 	}
 
 	public static int intersects(int x_a, int y_a, int x_b, int y_b, int x_c, int y_c, int x_d, int y_d) {
-		// TODO: Spezifikation des �bungsblattes implementieren
-
 		final int N = det(x_a, y_a, x_b, y_b, x_c, y_c, x_d, y_d);
 
 		//System.out.println("N: " + N);

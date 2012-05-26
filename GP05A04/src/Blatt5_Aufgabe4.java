@@ -13,35 +13,6 @@ import java.util.TreeSet;
 
 public class Blatt5_Aufgabe4 {
 
-	private static class PointComparator implements Comparator<int[]> {
-		
-		public static enum Pos {
-			X(0),
-			Y(1);
-			
-			private int pos;
-
-			private Pos(int pos) {
-				this.pos = pos;
-			}
-		}
-		
-		private Pos p = Pos.X;
-
-		public PointComparator(Pos p) {
-			super();
-			this.p = p;
-		}
-
-		public PointComparator() {
-		}
-
-		@Override
-		public int compare(int[] o1, int[] o2) {
-			return o1[p.pos] - o2[p.pos];
-		}
-	}
-	
 	public static int[][] get_bounding_box(int[][] polygon) {
 		int[][] result = new int[2][2];
 		
@@ -79,11 +50,9 @@ public class Blatt5_Aufgabe4 {
 		System.out.println();
 	}
 	
-	public static boolean liegt_innerhalb(int[][] polygon, int x_a, int y_a) {
-		// TODO: Spezifikation des �bungsblattes implementieren
+	public static boolean liegt_innerhalb(int[][] polygon, int x_a, int y_a) {	
 		
-		
-		int[] inters = getSortedIntersections(polygon, get_bounding_box(polygon), y_a);
+		int[] inters = getSortedIntersections(polygon, y_a);
 		
 		for( int i = 0; i < inters.length-1; i++ ) {
 			
@@ -94,20 +63,16 @@ public class Blatt5_Aufgabe4 {
 			}
 		}
 		
-		
-		
 		return false;
-	}
-	
-	public static <T> T getArrayRing(T[] array, int ix) {
-		return array[ix % array.length];
 	}
 	
 	public static boolean point_on_line(int x1, int y1, int x2, int y2, int xp, int yp) {
 		return (xp - x1) * (y2 - y1) - (yp - y1)*(x2 - x1) == 0 && (xp-x1)*(xp-x2) <= 0 ;
 	}
 	
-	public static int[] getSortedIntersections(int[][] polygon, int[][] bounding_box, int y) {
+	public static int[] getSortedIntersections(int[][] polygon, int y) {
+		
+		final int[][] bounding_box = get_bounding_box(polygon);
 		
 		SortedSet<Integer> intersList = new TreeSet<Integer>();
 		
