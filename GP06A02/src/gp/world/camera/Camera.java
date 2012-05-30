@@ -10,17 +10,17 @@ import com.jogamp.opengl.util.gl2.GLUT;
 public class Camera implements Updateable{
 
 	// x-Position der Kamera
-	protected float eyeX;
+	protected float eyeX = 2;
 	// y-Position der Kamera
-	protected float eyeY;
+	protected float eyeY = 2;
 	// z-Position der Kamera
-	protected float eyeZ;
+	protected float eyeZ = 2;
 	// x-Position der Kamera
-	protected float centerX;
+	protected float centerX = 0;
 	// y-Position der Kamera
-	protected float centerY;
+	protected float centerY = 0;
 	// z-Position der Kamera
-	protected float centerZ;
+	protected float centerZ = 0;
 	// x-Koordinate des view-up-Vektors
 	protected float viewUpX = 0;
 	// y-Koordinate des view-up-Vektors

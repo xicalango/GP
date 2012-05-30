@@ -15,6 +15,16 @@ public abstract class Entity implements Renderable, Updateable {
 	protected float z;
 	
 	private float[] curPos;
+	
+	private boolean visible = true;
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
 
 	protected float alpha; // blickrichtung
 
@@ -56,6 +66,9 @@ public abstract class Entity implements Renderable, Updateable {
 	@Override
 	public void render(GL2 gl, GLU glu, GLUT glut) {
 
+		if(!visible)
+			return;
+		
 		// gl.glLoadIdentity();
 
 		gl.glTranslatef(getCurX(), getCurY(), getCurZ());
