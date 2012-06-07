@@ -2,7 +2,6 @@ package gp.world;
 
 
 import gp.world.camera.Camera;
-import gp.world.camera.CentralPerspective;
 import gp.world.camera.DefaultCamera;
 
 import java.awt.event.KeyEvent;

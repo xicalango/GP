@@ -1,9 +1,8 @@
-package gp.world.camera;
+package gp.world;
 
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
 
-import gp.world.Perspective;
 
 public class CentralPerspective implements Perspective {
 
