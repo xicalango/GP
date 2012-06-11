@@ -63,6 +63,10 @@ public class A04World extends World implements Labyrinth, Margins{
         tex.setTexParameteri(gl,GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
         tex.setTexParameteri(gl,GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
         
+        tex = store.putFromFile("derp.jpg");
+        tex.setTexParameteri(gl,GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
+        tex.setTexParameteri(gl,GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
+        
         tex = store.putFromFile("tile00.png","wall");
         tex.setTexParameteri(gl,GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
         tex.setTexParameteri(gl,GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);

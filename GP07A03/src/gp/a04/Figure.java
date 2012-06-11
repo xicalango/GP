@@ -80,7 +80,7 @@ public class Figure extends Entity {
 		
 		//glut.glutSolidCone(.33, 1.33, 32, 32);
 
-        bindTexture(gl, "pnglogo.png");
+        bindTexture(gl, "derp.jpg");
         
 		// Kopf
 		gl.glTranslatef(0f, 0f, 1.1f);
